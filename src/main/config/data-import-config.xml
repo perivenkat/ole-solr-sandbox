@@ -1,0 +1,15 @@
+<dataConfig>
+    <dataSource type="FileDataSource"/>
+    <document>
+        <entity name="f" processor="FileListEntityProcessor"
+                baseDir="${user.home}/kuali/main/dev/ole-contentstore/import"
+                fileName=".*xml"
+                newerThan="'NOW-3DAYS'" recursive="true" rootEntity="false" dataSource="null">
+            <entity name="x" processor="XPathEntityProcessor" forEach="/fruit/apple/core/seed"
+                    url="${f.fileAbsolutePath}">
+                <field column="seed_s" xpath="/fruit/apple/core/seed" commonField="true" />
+                <field column="apple_id_s" xpath="/fruit/apple/@appleId" commonField="true" />
+            </entity>
+        </entity>
+    </document>
+</dataConfig>
